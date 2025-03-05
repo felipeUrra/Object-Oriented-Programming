@@ -1,50 +1,57 @@
 #include <iostream>
 #include <fstream>
 
-void write(int n1, int n2, int n3, const char* filename);
-void read(const char* filename);
-void print(char c);
+void write(const char* fileName, int n1, int n2, int n3);
+void write(std::ofstream& ofs, int n1, int n2, int n3);
+void read(const char* fileName);
+void read(std::ifstream& ifs);
+
 
 int main()
 {
-    int n1 = 4, n2 = 5, n3 = 6;
-    const char* filename = "text.txt";
-
-    write(4, 5, 6, filename);
-    read(filename);
     
 }
 
-void write(int n1, int n2, int n3, const char* filename)
+void write(const char* fileName, int n1, int n2, int n3)
 {
-    std::ofstream file(filename);
-    file << (n1 + n2 + n3) << ' ';
-    file << (n1 * n2 * n3);
-    file.close();
-}
+    std::ofstream file(fileName, std::ios::app);
 
-void read(std::ifstream& ifs) {
-    int a = 0;
-    int b = 0;
-
-    
-
-    print(ifs.get());
-}
-
-void read(const char* filename)
-{
-    std::ifstream file(filename);
     if (!file.is_open())
     {
-        std::cout << "File is not being opened";
+        std::cout << "The file wasn't opened.";
+        return;
+    }
+
+    return write(file, n1, n2, n3);
+}
+
+void write(std::ofstream& ofs, int n1, int n2, int n3)
+{
+    ofs << n1 + n2 + n3 << '\n';
+    ofs << n1 * n2 * n3;
+
+    ofs.close();
+}
+
+void read(const char* fileName)
+{
+    std::ifstream file(fileName, std::ios::in);
+
+    if (!file.is_open())
+    {
+        std::cout << "The file wasn't opened.";
         return;
     }
 
     return read(file);
 }
 
-void print(char c)
+void read(std::ifstream& ifs)
 {
-    std::cout << c;
+    int x;
+
+    ifs.read((char*)&x, sizeof(int));
+    std::cout << x << std::endl;
+
+    ifs.close();
 }
