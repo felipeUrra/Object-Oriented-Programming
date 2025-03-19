@@ -1,15 +1,19 @@
 #include <iostream>
+#include <cstring>
 
 class Bafla
 {
 public:
-	// Default constructor
+	// Custom constructor
 	Bafla(char brand[], float weight, float productionCost, float sellPrice) {
 		setBrand(brand);
 		setWeight(weight);
 		setProductionCost(productionCost);
 		setSellPrice(sellPrice);
 	}
+	
+	// Default constructor
+	Bafla() : brand(nullptr), weight(0), productionCost(0), sellPrice(0) { }
 
 	// Copy constructor
 	Bafla(const Bafla& other) {
@@ -31,6 +35,7 @@ public:
 		free;
 	}
 
+	// brand
 	const char* getBrand() const {
 		return brand;
 	}
@@ -50,8 +55,10 @@ public:
 
 		this->brand = new char[strlen(brand) + 1];
 		strcpy(this->brand, brand);
+        
 	}
 
+	// weight
 	float getWeight() const {
 		return weight;
 	}
@@ -60,6 +67,7 @@ public:
 		this->weight = weight;
 	}
 
+	// production cost
 	float getProductionCost() const {
 		return weight;
 	}
@@ -68,6 +76,7 @@ public:
 		this->productionCost = productionCost;
 	}
 
+	// sell price
 	float getSellPrice() const {
 		return sellPrice;
 	}
@@ -77,7 +86,7 @@ public:
 	}
 
 private:
-	char* brand = nullptr;
+	char* brand;
 	float weight;
 	float productionCost;
 	float sellPrice;
@@ -105,41 +114,110 @@ private:
 class Store
 {
 public:
-	Store();
-	~Store();
+	// Custom constructor
+	Store(Bafla* bafli, int maxAmountBafli, float revenues, float expenses) {
+		setBafli(bafli);
+		setMaxAmountBafli(maxAmountBafli);
+		setRevenues(revenues);
+		setExpenses(expenses);
+	}
+
+	// Default constructor
+	Store() : bafli(nullptr), maxAmountBafli(0), revenues(0), expenses(0) { }
+
+	// Copy constructor
+	Store(const Store& other) {
+		copyFrom(other);
+	}
+
+	// Assigment operator
+	Store& operator=(const Store& other) {
+		if (this != &other) {
+			free();
+			copyFrom(other);
+		}
+		return *this;
+	}
+
+	// Destructor
+	~Store() {
+		free();
+	}
 
 
-
+	// bafli
 	const Bafla* getBafli() const{
 		return bafli;
 	}
 
-	void setBafli(const char* bafli) {
+	void setBafli(Bafla* bafli) {
+		if (!bafli) {
+			return;
+		}
 
+		if (this->bafli == bafli) {
+			return;
+		}
+
+		if (this->bafli != nullptr) {
+			delete[] this->bafli;
+		}
+
+		this->bafli = new Bafla[maxAmountBafli];
+		this->bafli = bafli;
 	}
 
+	// maxAmountBafli
 	int getMaxAmountBafli() const{
 		return maxAmountBafli;
 	}
 
-	void setMaxAmountBafli() {
-
+	void setMaxAmountBafli(int maxAmountBafli) {
+        this->maxAmountBafli = maxAmountBafli;
 	}
+	
+	// revenues
+	float getRevenues() const{
+		return revenues;
+	}
+
+	void setRevenues(float revenues) {
+		this->revenues = revenues;
+	}
+
+	// expenses
+	float getExpenses() const{
+		return expenses;
+	}
+
+	void setExpenses(float expenses) {
+		this->expenses = expenses;
+	}
+
+
 
 private:
 	Bafla* bafli;
 	int maxAmountBafli;
 	float revenues;
 	float expenses;
+
+private:
+	void copyFrom(const Store& other) {
+		this->maxAmountBafli = other.maxAmountBafli;
+		this->revenues = other.revenues;
+		this->expenses = other.expenses;
+
+		this->bafli = new Bafla[other.maxAmountBafli];
+		this->bafli = other.bafli;
+	}
+
+	void free() {
+		delete[] bafli;
+	}
+
+
 };
-
-Store::Store()
-{
-}
-
-Store::~Store()
-{
-}
 
 int main()
 {
