@@ -189,7 +189,7 @@ void ArrayWrapper::matchSizes() {
 int* ArrayWrapper::sum() {
     matchSizes();
     
-    int sumSize = size1 + size2;
+    int sumSize = size1;
     int* sum = new[sumSize];
     
     for (int i = 0; i < sumSize; i++)
@@ -203,10 +203,10 @@ int* ArrayWrapper::sum() {
 int* ArrayWrapper::rest() {
     matchSizes();
 
-    int restSize = size1 + size2;
-    int* rest = new[sumSize];
+    int restSize = size1;
+    int* rest = new[restSize];
 
-    for (int i = 0; i < sumSize; i++)
+    for (int i = 0; i < restSize; i++)
     {
         rest[i] = arr1[i] - arr2[i];
     }
