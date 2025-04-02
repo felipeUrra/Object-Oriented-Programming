@@ -9,7 +9,7 @@ ArrayWrapper::ArrayWrapper(const int* arr1, const int* arr2, int size1, int size
     {
         return;
     }
-    
+
     setArr(ArrId::ARR1, arr1, size1);
     setArr(ArrId::ARR2, arr2, size2);
 }
@@ -39,13 +39,13 @@ void ArrayWrapper::setArr(ArrId arrId, const int* arr, int size) {
     if (arr == nullptr) {
         return;
     }
-    
+
     if (arrId == ArrId::ARR1) {
         if (arr1 == arr)
         {
             return;
         }
-        
+
 
         size1 = size;
         arr1 = new int[size1];
@@ -72,7 +72,7 @@ void ArrayWrapper::setArr(ArrId arrId, const int* arr, int size) {
     }
 }
 
-int* ArrayWrapper::getArr(ArrId arrId) const{
+int* ArrayWrapper::getArr(ArrId arrId) const {
     if (arrId == ArrId::ARR1) {
         return arr1;
     }
@@ -92,7 +92,7 @@ void ArrayWrapper::free() {
 
     arr1 = nullptr;
     arr2 = nullptr;
-    size1 = 0, size2= 0;
+    size1 = 0, size2 = 0;
 }
 
 void ArrayWrapper::addElement(ArrId arrId, int n) {
@@ -107,11 +107,7 @@ void ArrayWrapper::addElement(ArrId arrId, int n) {
         aux[size1 - 1] = n;
 
         delete[] arr1;
-        arr1 = new int[size1];
         arr1 = aux;
-
-        // delete[] aux;
-        // aux = nullptr;
 
         return;
     }
@@ -125,11 +121,7 @@ void ArrayWrapper::addElement(ArrId arrId, int n) {
     aux[size2 - 1] = n;
 
     delete[] arr2;
-    arr2 = new int[size2];
     arr2 = aux;
-    
-    // delete[] aux;
-    // aux = nullptr;
 }
 
 void ArrayWrapper::eliminateElement(ArrId arrId, int index) {
@@ -139,7 +131,7 @@ void ArrayWrapper::eliminateElement(ArrId arrId, int index) {
         {
             return;
         }
-        
+
         int* aux = new int[size1 - 1];
         for (int i = 0; i < size1; i++)
         {
@@ -147,13 +139,13 @@ void ArrayWrapper::eliminateElement(ArrId arrId, int index) {
             {
                 continue;
             }
-            
+
             aux[i] = arr1[i];
         }
 
         size1--;
 
-        arr1 = new int[size1];
+        delete[] arr1;
         arr1 = aux;
 
         return;
@@ -163,7 +155,7 @@ void ArrayWrapper::eliminateElement(ArrId arrId, int index) {
     {
         return;
     }
-    
+
     int* aux = new int[size2 - 1];
     for (int i = 0; i < size2; i++)
     {
@@ -176,7 +168,7 @@ void ArrayWrapper::eliminateElement(ArrId arrId, int index) {
     }
 
     size2--;
-    
+
     delete[] arr2;
     arr2 = aux;
 }
