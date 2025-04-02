@@ -1,6 +1,6 @@
 #pragma once
 
-enum class ArrId {ARR1 = 1, ARR2 = 2};
+enum class ArrId { ARR1 = 1, ARR2 = 2 };
 
 class ArrayWrapper
 {
@@ -21,12 +21,13 @@ public:
 
     int* getArr(ArrId) const;
     void setArr(ArrId, const int*, int);
-    
+
     void addElement(ArrId, int);
-    void eliminateElement(ArrId, int);
+    void deleteElement(ArrId, int);
 
     int* rest();
     int* sum();
+    void matchSizes();
 
     void copyFrom(const ArrayWrapper&);
     void free();
