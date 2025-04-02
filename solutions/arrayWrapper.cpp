@@ -173,6 +173,7 @@ void ArrayWrapper::deleteElement(ArrId arrId, int index) {
     arr2 = aux;
 }
 
+//ya no es necesaria
 void ArrayWrapper::matchSizes() {
     if (size1 != size2) {
         if (size1 < size2) {
@@ -197,28 +198,24 @@ void ArrayWrapper::matchSizes() {
 }
 
 int* ArrayWrapper::sum() {
-    matchSizes();
-    
-    int sumSize = size1;
+    int sumSize = (size1 > size2) ? size1 : size2;
     int* sum = new[sumSize];
     
     for (int i = 0; i < sumSize; i++)
     {
-        sum[i] = arr1[i] + arr2[i];
+        sum[i] = ((i < size1) ? arr1[i] : (0)) + ((i < size2) ? arr2[i] : 0);
     }
 
     return sum;
 }
 
 int* ArrayWrapper::rest() {
-    matchSizes();
-
-    int restSize = size1;
+    int restSize = (size > size2) ? size1 : size2;
     int* rest = new[restSize];
 
     for (int i = 0; i < restSize; i++)
     {
-        rest[i] = arr1[i] - arr2[i];
+        rest[i] = ((i < size1) ? arr1[i] : (0)) - ((i < size2) ? arr2[i] : 0);
     }
 
     return rest;
