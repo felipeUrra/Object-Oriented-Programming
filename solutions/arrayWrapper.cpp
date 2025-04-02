@@ -177,11 +177,21 @@ void ArrayWrapper::matchSizes() {
     if (size1 != size2) {
         if (size1 < size2) {
             ArrId arrId = ArrId::ARR1;
-            addElement(arrId, 0);
+            int diff = size2 - size1;
+
+            for (int i = 0; i < diff; i++)
+            {
+                addElement(arrId, 0);
+            }
         }
         else {
             ArrId arrId = ArrId::ARR2;
-            addElement(arrId, 0);
+            int diff = size1 - size2;
+
+            for (int i = 0; i < diff; i++)
+            {
+                addElement(arrId, 0);
+            }
         }
     }
 }
