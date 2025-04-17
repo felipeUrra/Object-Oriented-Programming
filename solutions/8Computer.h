@@ -1,7 +1,6 @@
 #pragma once
 
 typedef unsigned int uint;
-typedef unsigned double udouble;
 
 class Computer
 {
@@ -15,7 +14,7 @@ private:
 	uint hardDrive;
 	uint weight;
 	uint batteryLife;
-	udouble price;
+	double price;
 	uint quantity;
 
 	void copyFrom(const Computer&);
@@ -28,13 +27,13 @@ private:
 	void setHardDrive(uint);
 	void setWeight(uint);
 	void setBatteryLife(uint);
-	void setPrice(uint);
+	void setPrice(double);
 
 public:
 	Computer();
-	Computer(uint, const char*,const char*, uint, uint, uint, uint, uint, udouble, uint);
+	Computer(uint, const char*, const char*, uint, uint, uint, uint, double, uint);
 	Computer(const Computer&);
-	Computer& Computer(const Computer&);
+	Computer& operator=(const Computer&);
 	~Computer();
 
 	uint getSerialNumber() const;
@@ -44,7 +43,7 @@ public:
 	uint getHardDrive() const;
 	uint getWeight() const;
 	uint getBatteryLife() const;
-	udouble getPrice() const;
+	double getPrice() const;
 	uint getQuantity() const;
 
 	void setQuantity(uint);
