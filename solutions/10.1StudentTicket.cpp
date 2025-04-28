@@ -1,4 +1,4 @@
-#include "10studentTicket.h"
+#include "10.1StudentTicket.h"
 #include <iostream>
 
 StudentTicket::StudentTicket() : Ticket() {}
